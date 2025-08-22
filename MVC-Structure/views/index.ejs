@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management</title>
+</head>
+<body>
+    <div align="center">
+        <div>
+            <a href="/">Home</a>
+            <a href="/product">Add Product</a>
+        </div>
+        <h2>New Product Add</h2>
+        <form method="post" action="/product/add-product" enctype="multipart/form-data">
+            <table border="1">
+                <tr>
+                    <td>Title</td>
+                    <td><input type="text" name="title" /></td>
+                </tr>
+                <tr>
+                    <td>Decription</td>
+                    <td><input type="text" name="description" /></td>
+                </tr>
+                <tr>
+                    <td>Category</td>
+                    <td><input type="text" name="category" /></td>
+                </tr>
+                <tr>
+                    <td>Price</td>
+                    <td><input type="number" name="price" /></td>
+                </tr>
+                <tr>
+                    <td>Quantity</td>
+                    <td><input type="number" name="quantity" /></td>
+                </tr>
+                <tr>
+                    <td>Image</td>
+                    <td><input type="file" name="image" /></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Add Product" /></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <hr />
+    <div align="center">
+        <h2>Product Details</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Image</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% products.forEach(product => { %>
+                    <tr>
+                        <td><%= product.id %></td>
+                        <td><%= product.title %></td>
+                        <td><%= product.description %></td>
+                        <td><%= product.category %></td>
+                        <td><%= product.price %></td>
+                        <td><%= product.quantity %></td>
+                        <td><img src="<%= product.image %>" height="50" /></td>
+                        <td><a href="/product/edit-product/<%= product.id %>"><button>Edit</button></a></td>
+                        <td><a href="/product/delete-product/<%= product.id %>"><button>Delete</button></a></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Student</title>
+</head>
+<body>
+    <div align="center">
+        <a href="/">Home</a>
+        <a href="/add-student">Add Student</a>
+
+        <h1>Edit Student</h1>
+        <form method="post" action="/update-student/<%= student.id %>">
+            <table border="1">
+                <tr>
+                    <td>Id</td>
+                    <td><input type="text" name="id" value="<%= student.id %>" disabled /></td>
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td><input type="text" name="name" value="<%= student.name %>" /></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td><input type="text" name="email" value="<%= student.email %>" /></td>
+                </tr>
+                <tr>
+                    <td>Mobile No</td>
+                    <td><input type="text" name="mobileNo" value="<%= student.mobileNo %>" /></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Update Student" /></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>

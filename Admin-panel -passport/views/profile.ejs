@@ -1,0 +1,10 @@
+<%- include('header') %>
+<div class="page-wrapper">
+    <h2><%= user.firstname %> <%= user.lastname %></h2>
+    <p><%= user.email %></p>
+    <p>Hobbies: </p>
+    <% user.hobbies.forEach((u) => { %>
+            <li><%= u %></li>
+    <% }) %>
+</div>
+<%- include('footer') %>

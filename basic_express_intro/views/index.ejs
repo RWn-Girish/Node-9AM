@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div align="center">
+        <a href="/">Home</a>
+    <a href="/add-student">Add Student</a>
+
+    <h1>Student Information</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>MobileNo</th>
+                <th colspan="2">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% students.forEach(student => { %>
+                <tr>
+                    <td><%= student.id %></td>
+                    <td><%= student.name %></td>
+                    <td><%= student.email %></td>
+                    <td><%= student.mobileNo %></td>
+                    <td><a href="/edit-student/<%= student.id %>"><button>Edit</button></a></td>
+                    <td><a href="/delete-student/<%= student.id %>"><button>Delete</button></a></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    </div>
+
+</body>
+</html>
