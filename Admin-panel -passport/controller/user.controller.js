@@ -3,15 +3,14 @@ const path = require('path');
 const fs = require('fs');
 
 exports.addNewUserPage = async(req, res) => {
-  let user = await User.findById(req.cookies.admin._id)
-  return res.render("addUserForm", {user});
+  // let user = await User.findById(req.cookies.admin._id)
+  return res.render("addUserForm");
 };
 
 exports.viewAllUsers = async (req, res) => {
   try {
-    let user = await User.findById(req.cookies.admin._id)
     let users = await User.find();
-    res.render("viewAllUsers", { users, user });
+    res.render("viewAllUsers", { users });
   } catch (error) {
     console.log(error);
     return res.redirect("back");

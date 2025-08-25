@@ -1,10 +1,11 @@
 const express = require('express');
 const { dashboard, loginPage, loginUser, logoutUser, userPofile, forgotPasswordPage, sendEmail, verifyOTP, resetPassword } = require('../controller');
+const passport = require('passport');
 const routes = express.Router();
 
 routes.get("/", loginPage);
 
-routes.post("/login", loginUser);
+routes.post("/login", passport.authenticate('local', {failureRedirect: "/"}), loginUser);
 routes.get("/logout", logoutUser);
 routes.get("/profile", userPofile);
 

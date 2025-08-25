@@ -26,12 +26,7 @@ exports.loginPage = (req, res) => {
 
 exports.dashboard = async (req, res) => {
   try {
-    if (req.cookies.admin == undefined || req.cookies.admin._id == undefined) {
-      return res.redirect("/");
-    } else {
-      let user = await User.findById(req.cookies.admin._id);
-      return res.render("dashboard", { user });
-    }
+    return res.render("dashboard");
   } catch (error) {
     console.log("something Wrong");
     return res.redirect("/");
@@ -40,21 +35,7 @@ exports.dashboard = async (req, res) => {
 
 exports.loginUser = async (req, res) => {
   try {
-    let user = await User.findOne({ email: req.body.email });
-    // console.log(user);
-    if (user) {
-      if (user.password == req.body.password) {
-        console.log("Login Success");
-        res.cookie("admin", user);
-        return res.redirect("/dashboard");
-      } else {
-        console.log("User Credential Wrong");
-        return res.redirect("/");
-      }
-    } else {
-      console.log("User not found");
-      return res.redirect("/");
-    }
+    return res.redirect("/dashboard");
   } catch (error) {
     console.log("something Wrong");
     return res.redirect("/");
