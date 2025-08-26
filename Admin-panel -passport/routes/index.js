@@ -14,7 +14,7 @@ routes.post("/send-email", sendEmail);
 routes.post("/verify-otp", verifyOTP);
 routes.post("/reset-password", resetPassword);
 
-routes.get("/dashboard", dashboard);
+routes.get("/dashboard", passport.checkAuthentication, dashboard);
 
 routes.use("/users", require("./users.routes.js"));
 

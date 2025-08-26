@@ -13,7 +13,7 @@ exports.logoutUser = (req, res) => {
 };
 exports.loginPage = (req, res) => {
   try {
-    if (req.cookies.admin == undefined || req.cookies.admin._id == undefined) {
+    if (!req.isAuthenticated()) {
       return res.render("auth/loginPage");
     } else {
       return res.redirect("/dashboard");

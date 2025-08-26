@@ -1,6 +1,7 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require("../model/user.model");
+const { renderFile } = require('ejs');
 
 passport.use(new LocalStrategy({
     usernameField: 'email'
@@ -27,5 +28,14 @@ passport.deserializeUser(async(id, done) => {
         done(null, user);
     }
 });
+
+
+passport.checkAuthentication = (req, res, next) => {
+    if(req.isAuthenticated()){
+        next();
+    }else{
+        return res.redirect("/");
+    }
+}
 
 module.exports = passport;
