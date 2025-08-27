@@ -4,8 +4,14 @@ const otpgenerator = require("otp-generator");
 
 exports.logoutUser = (req, res) => {
   try {
-    res.clearCookie("admin");
-    return res.redirect("/");
+    req.session.destroy((err)=> {
+      if (err){
+        console.log(err);
+        return false;
+      }else{
+        return res.redirect("/");
+      }
+    })
   } catch (error) {
     console.log("something Wrong");
     return res.redirect("/");
@@ -44,12 +50,8 @@ exports.loginUser = async (req, res) => {
 
 exports.userPofile = async (req, res) => {
   try {
-    if (req.cookies.admin == undefined || req.cookies.admin._id == undefined) {
-      return res.redirect("/");
-    } else {
-      let user = await User.findById(req.cookies.admin._id);
+      let user = req.user;
       return res.render("profile", { user });
-    }
   } catch (error) {
     console.log("something Wrong");
     return res.redirect("/");

@@ -26,8 +26,10 @@ app.use(session({
 
 app.use(passport.session());
 app.use(passport.initialize());
+app.use(passport.setAutheticatUser);
 
 app.use("/", require("./routes/index"));
+app.use("/website", require("./routes/webPage.routes"));
 
 app.listen(port, () => {
     console.log(`Server Start at http://localhost:${port}`)
