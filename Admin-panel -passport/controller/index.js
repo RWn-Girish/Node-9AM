@@ -41,6 +41,7 @@ exports.dashboard = async (req, res) => {
 
 exports.loginUser = async (req, res) => {
   try {
+    req.flash("success", 'Login Success');
     return res.redirect("/dashboard");
   } catch (error) {
     console.log("something Wrong");

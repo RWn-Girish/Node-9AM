@@ -7,12 +7,15 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
 const localStrategy = require("./middleware/localStrategy");
+const flash = require('connect-flash');
+const flashMessage = require("./middleware/flashMessage");
 
 app.set('view engine', 'ejs');
 app.use(express.urlencoded());
 app.use(cookieParser());
 app.use(express.static("public"));
 app.use("/uploads", express.static('uploads'));
+app.use(flash());
 
 app.use(session({
     name : "testing",
@@ -27,6 +30,7 @@ app.use(session({
 app.use(passport.session());
 app.use(passport.initialize());
 app.use(passport.setAutheticatUser);
+app.use(flashMessage.setFlashMessage);
 
 app.use("/", require("./routes/index"));
 app.use("/website", require("./routes/webPage.routes"));

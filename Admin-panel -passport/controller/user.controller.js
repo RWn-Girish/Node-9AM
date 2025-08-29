@@ -32,13 +32,16 @@ exports.addNewUser = async (req, res) => {
 
     if (newUser) {
       console.log("User Created");
+      req.flash("success", "New User Added!!!!");
       return res.redirect("/users/add-user");
     } else {
       console.log("Something Error");
+      req.flash("error", "Something Error");
       return res.redirect("/users/add-user");
     }
   } catch (error) {
     console.log(error);
+    req.flash("error", "Something Error");
     return res.redirect("back");
   }
 };
