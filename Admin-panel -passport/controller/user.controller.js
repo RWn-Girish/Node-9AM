@@ -52,6 +52,7 @@ exports.deleteUser = async (req, res) => {
     let user = await User.findById(id);
     if(!user){
       console.log("User not Found");
+      req.flash("error", "User Not Found!!!");
       return res.redirect("/users/view-users");
     }
     if(user.image != ""){
@@ -65,6 +66,7 @@ exports.deleteUser = async (req, res) => {
 
     await User.findByIdAndDelete(id);
     console.log("User Delete Success");
+    req.flash("success", "User Delete Success"); 
     return res.redirect("/users/view-users");
 
   } catch (error) {
@@ -112,6 +114,7 @@ exports.updateUser = async (req, res) => {
     }
     await User.findByIdAndUpdate(id, {...req.body, image: imagePath}, {new: true});
     console.log("User Update Success");
+    req.flash("success", "User Update Success"); 
     return res.redirect("/users/view-users");
 
   } catch (error) {

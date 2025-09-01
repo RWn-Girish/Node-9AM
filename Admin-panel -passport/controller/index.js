@@ -14,6 +14,7 @@ exports.logoutUser = (req, res) => {
     })
   } catch (error) {
     console.log("something Wrong");
+    req.flash("error", "Server Error!!!");
     return res.redirect("/");
   }
 };
@@ -73,6 +74,7 @@ exports.sendEmail = async (req, res) => {
     let user = await User.findOne({ email: req.body.email });
     if (!user) {
       console.log("User not found");
+      req.flash("error", "User Not Found");
       return res.redirect("/");
     }
 
@@ -129,12 +131,15 @@ exports.resetPassword = async (req, res) => {
         if(req.body.cpassword == req.body.newpassword){
           await User.findByIdAndUpdate(user._id, {password: req.body.newpassword}, {new: true});
           res.clearCookie("email");
+          req.flash("success", "Password was Reset Success!!!!");
           return res.redirect("/");
         }else{
           console.log("Password is not matched");
+          req.flash("error", "Password was Not Matched!!!");
           return res.redirect("back");
         }
     }else{
+      req.flash("error", "User Not Found");
       return res.redirect("/");
     }
   } catch (error) {
