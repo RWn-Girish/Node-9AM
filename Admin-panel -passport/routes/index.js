@@ -17,5 +17,6 @@ routes.post("/reset-password", resetPassword);
 routes.get("/dashboard", passport.checkAuthentication, dashboard);
 
 routes.use("/users", require("./users.routes.js"));
+routes.use("/category", require("./category.routes.js"));
 
 module.exports = routes;
