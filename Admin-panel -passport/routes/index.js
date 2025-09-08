@@ -19,5 +19,6 @@ routes.get("/dashboard", passport.checkAuthentication, dashboard);
 routes.use("/users", require("./users.routes.js"));
 routes.use("/category", require("./category.routes.js"));
 routes.use("/subcategory", require("./subcategory.routes.js"));
+routes.use("/extracategory", require("./extracategory.routes.js"));
 
 module.exports = routes;
