@@ -41,7 +41,7 @@
                                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">Category Name</label>
                                         <div class="col-sm-9">
                                             <!-- <input type="text" name="category" class="form-control" id="fname" placeholder="Enter Category Name Here"> -->
-                                             <select name="category" class="form-control">
+                                             <select name="category" id="category" class="form-control">
                                                 <option>Select Category</option>
                                                 <% categories.forEach((cat) => { %>
                                                     <option value="<%= cat.id %>"><%= cat.category %></option>
@@ -54,11 +54,8 @@
                                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">Sub Category Name</label>
                                         <div class="col-sm-9">
                                             <!-- <input type="text" name="category" class="form-control" id="fname" placeholder="Enter Category Name Here"> -->
-                                             <select name="subcategory" class="form-control">
+                                             <select name="subcategory" id="subcategory" class="form-control">
                                                 <option>Select Sub Category</option>
-                                                <% subcategories.forEach((cat) => { %>
-                                                    <option value="<%= cat.id %>"><%= cat.subcategory %></option>
-                                                <% }) %>
                                              </select>
                                         </div>
                                     </div>
@@ -96,3 +93,28 @@
             <!-- End Container fluid  -->
             <!-- ============================================================== -->
 <%- include('../footer') %>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        let category = document.getElementById("category");
+        let subcategory = document.querySelector("#subcategory");
+        
+        category.addEventListener('change', ()=> {
+            // console.log(category.value);
+            let categoryId = category.value;
+            subcategory.innerHTML = "<option>Select Sub Category</option>";
+            fetch(`/subcategory/getAllSubCategory?categoryId=${categoryId}`)
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data.categories);
+                data.categories.forEach(cat => {
+                    let option = document.createElement('option');
+                    option.setAttribute('value', cat._id)
+                    option.innerHTML = cat.subcategory
+                    subcategory.appendChild(option)
+                })
+            })
+            .catch(err => console.log(err));
+        })
+    })
+</script>
