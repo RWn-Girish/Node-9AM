@@ -1,5 +1,6 @@
 const UserModel = require("../models/user.model");
 const bcrypt = require('bcrypt');
+const jwt =require('jsonwebtoken');
 
 exports.registerUser = async(req, res) => {
     try {
@@ -32,7 +33,10 @@ exports.loginUser = async(req, res) => {
         }
         let comaprePassword = await bcrypt.compare(req.body.password, user.password)
         if(comaprePassword){
-            return res.json({status: 200,message: "Login Success", data: user})
+            let token = jwt.sign({
+                userId: user._id,
+            }, process.env.SECRET_KEY)
+            return res.json({status: 200,message: "Login Success", token: token})
         }else{
             return res.json({status: 400,message: "Invalid Credential"})
         }
